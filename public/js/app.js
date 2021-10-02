@@ -2096,12 +2096,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     title: String,
-    content: String,
-    price: Number
+    description: String
   }
 });
 
@@ -2152,21 +2150,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.loading = true;
-    setTimeout(function () {
-      _this.bookables = {
-        bookable1: {
-          title: 'ویلای ارزان',
-          content: 'ویلای با کیفیت با بهترین قیمت',
-          price: 1500
-        },
-        bookable2: {
-          title: 'ویلای ارزان1',
-          content: 'ویلای با کیفیت با بهترین قیمت1',
-          price: 1000
-        }
-      };
+    axios.get('/api/bookables').then(function (res) {
+      _this.bookables = res.data;
       _this.loading = false;
-    }, 1000);
+    })["catch"](function (error) {
+      return console.log(error.response.data);
+    });
   }
 });
 
@@ -6774,7 +6763,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bookableBox[data-v-665ee471] {\n    border: 1px solid #cccccc;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bookableBox[data-v-665ee471] {\n    border: 1px solid #cccccc;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px;\n    margin-bottom: 40px;\n    min-height: 300px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38561,9 +38550,7 @@ var render = function() {
     _c("div", { staticClass: "bookableBox" }, [
       _c("h1", [_vm._v(_vm._s(_vm.title))]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.content))]),
-      _vm._v(" "),
-      _c("p", [_vm._v("قیمت:" + _vm._s(_vm.price))])
+      _c("p", [_vm._v(_vm._s(_vm.description))])
     ])
   ])
 }
@@ -38604,7 +38591,7 @@ var render = function() {
               staticClass: "col-12 col-lg-4",
               attrs: {
                 title: bookable.title,
-                content: bookable.content,
+                description: bookable.description,
                 price: bookable.price
               }
             })

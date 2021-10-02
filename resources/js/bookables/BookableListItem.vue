@@ -2,8 +2,7 @@
     <div>
         <div class="bookableBox">
             <h1>{{ title }}</h1>
-            <p>{{ content }}</p>
-            <p>قیمت:{{ price }}</p>
+            <p>{{ description }}</p>
         </div>
     </div>
 </template>
@@ -12,8 +11,7 @@
     export default {
         props:{
             title: String,
-            content: String,
-            price: Number
+            description: String,
         }
     }
 </script>
@@ -26,5 +24,7 @@
         flex-direction: column;
         align-items: center;
         padding: 10px;
+        margin-bottom: 40px;
+        min-height: 300px;
     }
 </style>
