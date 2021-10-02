@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ExampleComponent from "./components/ExampleComponent";
+import Bookables from "./bookables/Bookables";
 import ExampleCmp from "./components/ExampleCmp";
 
 Vue.use(VueRouter)
 
 const routes = [
-    { name:'home', path: '/', component: ExampleComponent },
+    { name:'home', path: '/', component: Bookables },
     { name:'second', path: '/second', component: ExampleCmp },
 ]
 
