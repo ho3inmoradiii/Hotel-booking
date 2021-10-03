@@ -2156,7 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.loading = true;
     axios.get('/api/bookables').then(function (res) {
-      _this.bookables = res.data;
+      _this.bookables = res.data.data;
       _this.loading = false;
     })["catch"](function (error) {
       return console.log(error.response.data);
@@ -2210,7 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("/api/bookables/".concat(this.id)).then(function (res) {
-      _this.bookable = res.data;
+      _this.bookable = res.data.data;
     });
   }
 });
@@ -38722,9 +38722,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.loading
-    ? _c("div", { staticClass: "text-right" }, [
-        _vm._v("\n    Data is loading...\n")
-      ])
+    ? _c("div", [_vm._v("\n    Data is loading...\n")])
     : _c("div", { staticClass: "container" }, [
         _c(
           "div",

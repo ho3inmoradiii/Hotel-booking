@@ -1,5 +1,5 @@
 <template>
-    <div v-if="loading" class="text-right">
+    <div v-if="loading">
         Data is loading...
     </div>
     <div class="container" v-else>
@@ -31,7 +31,7 @@
             this.loading = true
             axios.get('/api/bookables')
             .then(res => {
-                this.bookables = res.data
+                this.bookables = res.data.data
                 this.loading = false
             })
             .catch(error => console.log(error.response.data))

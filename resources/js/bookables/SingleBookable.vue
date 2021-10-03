@@ -31,7 +31,7 @@
         created() {
             axios.get(`/api/bookables/${this.id}`)
             .then(res => {
-                this.bookable = res.data
+                this.bookable = res.data.data
             })
         }
     }
