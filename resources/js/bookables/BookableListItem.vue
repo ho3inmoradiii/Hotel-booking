@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="bookableBox">
-            <h1>{{ title }}</h1>
+            <router-link :to="{ name: 'bookable', params: { id: id }}">
+                <h3>{{ title }}</h3>
+            </router-link>
+
             <p>{{ description }}</p>
         </div>
     </div>
@@ -12,6 +15,7 @@
         props:{
             title: String,
             description: String,
+            id: Number
         }
     }
 </script>
@@ -25,6 +29,6 @@
         align-items: center;
         padding: 10px;
         margin-bottom: 40px;
-        min-height: 300px;
+        height: 300px;
     }
 </style>

@@ -9,6 +9,7 @@
                 :key="index"
                 :title="bookable.title"
                 :description="bookable.description"
+                :id="bookable.id"
                 v-bind:price="bookable.price"
                 class="col-12 col-lg-4"
             ></bookable-list-item>
