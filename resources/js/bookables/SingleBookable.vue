@@ -4,7 +4,7 @@
             Data is loading...
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 pb-4">
                 <div class="card" v-if="bookable">
                     <div class="card-body">
                         <h5 class="card-title">{{ bookable.title }}</h5>
@@ -14,14 +14,16 @@
                 </div>
             </div>
             <div class="col-md-4">
-                Availability & price
+                <availability></availability>
             </div>
         </div>
     </section>
 </template>
 
 <script>
+    import Availability from './Availability';
     export default {
+        components:{Availability},
         data(){
             return{
                 bookable:null,

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use Illuminate\Database\Seeder;
-use App\Models\Bookable;
 
-class BookablesTableSeeder extends Seeder
+class BookingTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class BookablesTableSeeder extends Seeder
      */
     public function run()
     {
-        Bookable::factory()->count(150)->create();
+        Booking::factory()->count(100)->create();
     }
 }

@@ -1,0 +1,102 @@
+<template>
+    <div>
+        <h6 class="text-uppercase text-secondary font-weight-holder">
+            check availability
+            <span v-if="hasAvailability" class="text-success">AVAILABLE</span>
+            <span v-if="noAvailability" class="text-danger">NOT AVAILABLE</span>
+        </h6>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="from">From</label>
+                <input
+                    type="text"
+                    id="from"
+                    name="from"
+                    class="form-control form-control-sm"
+                    placeholder="Start date"
+                    v-model="StartDate"
+                    @keyup.enter="check"
+                    :class="[{'is-invalid':errorFor('from')}]"
+                >
+                <div class="invalid-feedback" v-for="(error,index) in errorFor('from')" :key="index">{{ error }}</div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="to">To</label>
+                <input
+                    type="text"
+                    id="to"
+                    name="to"
+                    class="form-control form-control-sm"
+                    placeholder="End date"
+                    v-model="EndDate"
+                    @keyup.enter="check"
+                    :class="[{'is-invalid':errorFor('to')}]"
+                >
+                <div class="invalid-feedback" v-for="(error,index) in errorFor('to')" :key="index">{{ error }}</div>
+            </div>
+
+            <button class="btn btn-secondary btn-block" :disabled="loading" @click="check">Check!</button>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data(){
+            return{
+                StartDate:null,
+                EndDate:null,
+                loading:false,
+                status:null,
+                error:null
+            }
+        },
+        created() {
+            console.log(this.StartDate)
+        },
+        methods:{
+            check(){
+                this.loading = true
+                this.error = null
+                axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.StartDate}&to=${this.EndDate}`)
+                .then(res => {
+                    this.status = res.status
+                }).catch(error => {
+                    if (error.response.status === 422){
+                        this.error = error.response.data.errors
+                    }
+                    this.status = error.response.status;
+                }).then(() => (this.loading = false))
+            },
+            errorFor(field){
+                return this.hasError && this.error[field] ? this.error[field] : null;
+            }
+        },
+        computed:{
+            hasError(){
+                return this.status === 422 && this.error !== null;
+            },
+            hasAvailability(){
+                return this.status === 200;
+            },
+            noAvailability(){
+                return this.status === 404;
+            }
+        }
+    }
+</script>
+
+<style scoped>
+    label{
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: gray;
+        font-weight: bolder;
+    }
+
+    .invalid-feedback{
+        color: #b22222;
+    }
+</style>
