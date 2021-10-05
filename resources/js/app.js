@@ -9,6 +9,9 @@ window.Vue = require('vue').default;
 
 import router from './routes';
 import Index from './Index';
+import StarRating from './shared/components/StarRating';
+
+Vue.component('star-rating',StarRating);
 
 const app = new Vue({
     el: '#app',
