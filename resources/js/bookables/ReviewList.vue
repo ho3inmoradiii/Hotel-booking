@@ -11,7 +11,7 @@
                         Ali rezaii
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <star-rating class="fa-lg" :starRating="review.rating">{{ review.rating }}</star-rating>
+                        <star-rating class="fa-lg" :value="review.rating">{{ review.rating }}</star-rating>
                     </div>
                 </div>
                 <div class="row">
