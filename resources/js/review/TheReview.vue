@@ -1,46 +1,56 @@
 <template>
-    <div class="row">
-        <div
-            :class="[{'col-md-4':twoColumn},
+    <div>
+        <fatal-error v-if="error"></fatal-error>
+        <div class="row" v-else>
+            <div
+                :class="[{'col-md-4':twoColumn},
             {'d-none':oneColumn}]"
-        >
-            <div class="card">
-                <div class="card-body">
-                    <div v-if="loading">Loading...</div>
-                    <div v-if="hasBooking">
-                        <p>
-                            Stayed at
-                            <router-link :to="{name:'bookable',params:{id:booking.bookable.bookable_id}}">
-                            {{ booking.bookable.title }}
-                            </router-link>
-                        </p>
-                        <p>From {{ booking.from }} To {{ booking.to }}</p>
+            >
+                <div class="card">
+                    <div class="card-body">
+                        <div v-if="loading">Loading...</div>
+                        <div v-if="hasBooking">
+                            <p>
+                                Stayed at
+                                <router-link :to="{name:'bookable',params:{id:booking.bookable.bookable_id}}">
+                                    {{ booking.bookable.title }}
+                                </router-link>
+                            </p>
+                            <p>From {{ booking.from }} To {{ booking.to }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div
-            :class="[{'col-md-8':twoColumn},
+            <div
+                :class="[{'col-md-8':twoColumn},
             {'col-md-12':oneColumn}]"
-        >
-            <div v-if="loading">
-                Loading...
-            </div>
-            <div v-else>
-                <div v-if="alreadyReviewed">
-                    You have already left a review for this booking
+            >
+                <div v-if="loading">
+                    Loading...
                 </div>
                 <div v-else>
-                    <div class="form-group">
-                        <label class="text-muted">Select the star rating</label>
-                        <star-rating class="fa-3x" v-model="review.rating"></star-rating>
+                    <div v-if="alreadyReviewed">
+                        You have already left a review for this booking
                     </div>
-                    <div class="form-group">
-                        <label for="content" class="text-muted">Select the star rating</label>
-                        <textarea class="form-control" id="content" cols="30" rows="10" v-model="review.content"></textarea>
-                    </div>
+                    <div v-else>
+                        <div class="form-group">
+                            <label class="text-muted">Select the star rating</label>
+                            <star-rating class="fa-3x" v-model="review.rating"></star-rating>
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="text-muted">Select the star rating</label>
+                            <textarea class="form-control"
+                                      id="content"
+                                      cols="30"
+                                      rows="10"
+                                      v-model="review.content"
+                                      :class="[{'is-invalid':errorFor('content')}]"
+                            ></textarea>
+                            <validation-errors :errors="errorFor('content')"></validation-errors>
+                        </div>
 
-                    <button class="btn btn-lg btn-primary btn-block" @click.prevent="submit" :disabled="loading">Submit</button>
+                        <button class="btn btn-lg btn-primary btn-block" @click.prevent="submit" :disabled="sending">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,6 +58,8 @@
 </template>
 
 <script>
+    import {is404,is422} from "../shared/utils/response";
+
     export default {
         data(){
             return{
@@ -59,7 +71,9 @@
                 existingReview:null,
                 loading:false,
                 booking:null,
-                error:null
+                error:false,
+                errors:null,
+                sending:false
             }
         },
         created() {
@@ -68,12 +82,13 @@
             axios.get(`/api/reviews/${this.review.id}`)
             .then(res => this.existingReview = res.data.data)
             .catch(error => {
-                if (error.response && error.response.status && error.response.status === 404){
+                if (is404(error)){
                     return axios.get(`/api/booking-by-review/${this.review.id}`)
                     .then(response => {
-                        console.log(response);
                         this.booking = response.data.data;
-                    });
+                    }).catch(err => {
+                        this.error = !is404(err);
+                        });
                 }
             }).then(() => (this.loading = false))
         },
@@ -96,14 +111,25 @@
         },
         methods:{
             submit(){
-                this.loading = true;
+                this.errors = null;
+                this.sending = true;
                 console.log(this.review)
                 axios.post('/api/reviews',this.review)
                 .then(res => console.log(res))
                 .catch(error => {
-                    this.error = true
+                    if(is422(error)){
+                        const errors = error.response.data.errors;
+                        if (errors["content"] && _.size(errors) === 1){
+                            this.errors = errors;
+                        }
+                        return;
+                    }
+                    this.error = true;
                 })
-                .then(() => (this.loading = false))
+                .then(() => (this.sending = false))
+            },
+            errorFor(field){
+                return this.errors !== null && this.errors[field] ? this.errors[field] : null;
             }
         }
     }

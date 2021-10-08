@@ -19,7 +19,7 @@
                     @keyup.enter="check"
                     :class="[{'is-invalid':errorFor('from')}]"
                 >
-                <div class="invalid-feedback" v-for="(error,index) in errorFor('from')" :key="index">{{ error }}</div>
+                <validation-errors :errors="errorFor('from')"></validation-errors>
             </div>
 
             <div class="form-group col-md-6">
@@ -34,7 +34,7 @@
                     @keyup.enter="check"
                     :class="[{'is-invalid':errorFor('to')}]"
                 >
-                <div class="invalid-feedback" v-for="(error,index) in errorFor('to')" :key="index">{{ error }}</div>
+                <validation-errors :errors="errorFor('to')"></validation-errors>
             </div>
 
             <button class="btn btn-secondary btn-block" :disabled="loading" @click="check">Check!</button>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+    import {is422} from "../shared/utils/response";
     export default {
         data(){
             return{
@@ -64,7 +65,7 @@
                 .then(res => {
                     this.status = res.status
                 }).catch(error => {
-                    if (error.response.status === 422){
+                    if (is422(error)){
                         this.error = error.response.data.errors
                     }
                     this.status = error.response.status;
