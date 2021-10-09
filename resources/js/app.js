@@ -12,10 +12,12 @@ import Index from './Index';
 import StarRating from './shared/components/StarRating';
 import FatalError from './shared/components/FatalError';
 import ValidationErrors from './shared/components/ValidationErrors';
+import TheSuccess from './shared/components/TheSuccess';
 
 Vue.component('star-rating',StarRating);
 Vue.component('fatal-error',FatalError);
 Vue.component('validation-errors',ValidationErrors);
+Vue.component('the-success',TheSuccess);
 
 const app = new Vue({
     el: '#app',

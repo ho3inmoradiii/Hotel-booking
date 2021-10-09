@@ -1,7 +1,10 @@
 <template>
     <div>
+        <the-success v-if="success">
+            You have left a review, thank you very much.
+        </the-success>
         <fatal-error v-if="error"></fatal-error>
-        <div class="row" v-else>
+        <div class="row" v-if="!success && !error">
             <div
                 :class="[{'col-md-4':twoColumn},
             {'d-none':oneColumn}]"
@@ -74,7 +77,8 @@
                 loading:false,
                 booking:null,
                 error:false,
-                sending:false
+                sending:false,
+                success:false
             }
         },
         created() {
@@ -114,9 +118,12 @@
             submit(){
                 this.errors = null;
                 this.sending = true;
+                this.success = false;
                 console.log(this.review)
                 axios.post('/api/reviews',this.review)
-                .then(res => console.log(res))
+                .then(res => {
+                    this.success = (res.status === 201)
+                })
                 .catch(error => {
                     if(is422(error)){
                         const errors = error.response.data.errors;
