@@ -1,9 +1,9 @@
 <template>
     <div>
         <h6 class="text-uppercase text-secondary font-weight-holder">
-            check availability
-            <span v-if="hasAvailability" class="text-success">AVAILABLE</span>
-            <span v-if="noAvailability" class="text-danger">NOT AVAILABLE</span>
+            check availability:
+            <span v-if="hasAvailability" class="text-success font-weight-bold font-italic"> AVAILABLE</span>
+            <span v-if="noAvailability" class="text-danger font-weight-bold font-italic"> NOT AVAILABLE</span>
         </h6>
 
         <div class="form-row">
@@ -61,6 +61,7 @@
             check(){
                 this.loading = true
                 this.error = null
+                this.$store.commit('setLastSearch',{from:this.StartDate,to:this.EndDate})
                 axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.StartDate}&to=${this.EndDate}`)
                 .then(res => {
                     this.status = res.status

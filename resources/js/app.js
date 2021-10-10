@@ -13,6 +13,9 @@ import StarRating from './shared/components/StarRating';
 import FatalError from './shared/components/FatalError';
 import ValidationErrors from './shared/components/ValidationErrors';
 import TheSuccess from './shared/components/TheSuccess';
+import store from './store';
+
+
 
 Vue.component('star-rating',StarRating);
 Vue.component('fatal-error',FatalError);
@@ -22,6 +25,7 @@ Vue.component('the-success',TheSuccess);
 const app = new Vue({
     el: '#app',
     router,
+    store,
     components:{
         index: Index
     }
