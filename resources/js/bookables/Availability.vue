@@ -65,19 +65,20 @@
             console.log(this.StartDate)
         },
         methods:{
-            check(){
+            async check(){
                 this.loading = true
                 this.error = null
                 this.$store.commit('setLastSearch',{from:this.StartDate,to:this.EndDate})
-                axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.StartDate}&to=${this.EndDate}`)
-                .then(res => {
-                    this.status = res.status
-                }).catch(error => {
-                    if (is422(error)){
-                        this.error = error.response.data.errors
+                try{
+                    this.status = (await axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.StartDate}&to=${this.EndDate}`)).status;
+                    this.$emit("availability",this.hasAvailability);
+                }catch (e) {
+                    if (is422(e)){
+                        this.error = e.response.data.errors;
                     }
-                    this.status = error.response.status;
-                }).then(() => (this.loading = false))
+                    this.status = e.response.status;
+                }
+                this.loading = false;
             },
             errorFor(field){
                 return this.hasError && this.error[field] ? this.error[field] : null;

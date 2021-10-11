@@ -17,4 +17,4 @@ Route::get('/{any?}', function () {
     return view('welcome');
 })->where('any','^(?!api\/)[\/\w\.-]*');
 
-//Route::get('/bookables/{bookable}/availability',\App\Http\Controllers\Api\BookableAvailabilityController::class);
+//Route::get('/bookables/{bookable}/price',\App\Http\Controllers\Api\BookablePriceController::class);

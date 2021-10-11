@@ -15,7 +15,13 @@
                 <review-list></review-list>
             </div>
             <div class="col-md-4">
-                <availability></availability>
+                <availability @availability="checkPrice($event)" class="mb-4"></availability>
+                <transition name="fade">
+                    <price-breakdown v-if="price" :price="price" class="mb-4"></price-breakdown>
+                </transition>
+                <transition name="fade">
+                    <button class="btn btn-outline-secondary btn-block" v-if="price">Book now</button>
+                </transition>
             </div>
         </div>
     </section>
@@ -24,11 +30,14 @@
 <script>
     import Availability from './Availability';
     import ReviewList from './ReviewList';
+    import { mapState } from 'vuex';
+    import PriceBreakdown from './PriceBreakdown';
     export default {
-        components:{Availability,ReviewList},
+        components:{Availability,ReviewList,PriceBreakdown},
         data(){
             return{
                 bookable:null,
+                price:null,
             }
         },
         props:['id'],
@@ -37,6 +46,25 @@
             .then(res => {
                 this.bookable = res.data.data
             })
+            console.log(this.price)
+        },
+        computed:{
+            ...mapState({
+                lastSearchComputed: 'lastSearch'
+            })
+        },
+        methods:{
+            async checkPrice(hasAvailability){
+                if (!hasAvailability){
+                    this.price = null;
+                }
+
+                try{
+                    this.price = (await axios.get(`/api/bookables/${this.bookable.id}/price?from=${this.lastSearchComputed.from}&to=${this.lastSearchComputed.to}`)).data.data;
+                }catch (e) {
+                    this.price = null;
+                }
+            }
         }
     }
 </script>
