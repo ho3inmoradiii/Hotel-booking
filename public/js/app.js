@@ -2510,6 +2510,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2533,14 +2544,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     axios.get("/api/bookables/".concat(this.id)).then(function (res) {
       _this.bookable = res.data.data;
     });
-    console.log(this.price);
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)({
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)({
     lastSearchComputed: 'lastSearch'
-  })),
+  })), {}, {
+    inBasketAlready: function inBasketAlready() {
+      var _this2 = this;
+
+      if (this.$store.state.basket.items.length === 0) {
+        return false;
+      }
+
+      var filteredItem = this.$store.state.basket.items.filter(function (item) {
+        return item.bookable.id === _this2.bookable.id;
+      });
+
+      if (Object.keys(filteredItem).length !== 0) {
+        return true;
+      }
+    }
+  }),
   methods: {
     checkPrice: function checkPrice(hasAvailability) {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -2548,22 +2574,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 if (!hasAvailability) {
-                  _this2.price = null;
+                  _this3.price = null;
                 }
 
                 _context.prev = 1;
                 _context.next = 4;
-                return axios.get("/api/bookables/".concat(_this2.bookable.id, "/price?from=").concat(_this2.lastSearchComputed.from, "&to=").concat(_this2.lastSearchComputed.to));
+                return axios.get("/api/bookables/".concat(_this3.bookable.id, "/price?from=").concat(_this3.lastSearchComputed.from, "&to=").concat(_this3.lastSearchComputed.to));
 
               case 4:
-                _this2.price = _context.sent.data.data;
+                _this3.price = _context.sent.data.data;
                 _context.next = 10;
                 break;
 
               case 7:
                 _context.prev = 7;
                 _context.t0 = _context["catch"](1);
-                _this2.price = null;
+                _this3.price = null;
 
               case 10:
               case "end":
@@ -2579,7 +2605,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         price: this.price,
         dates: this.lastSearchComputed
       });
-    }
+    } // showState(){
+    //     const filteredItem = this.$store.state.basket.items.filter(item => item.bookable.id === this.bookable.id);
+    //
+    //     console.log(Object.keys(filteredItem).length)
+    // }
+
   }
 });
 
@@ -41435,17 +41466,30 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("transition", { attrs: { name: "fade" } }, [
-            _vm.price
+            _vm.price && _vm.bookable
               ? _c(
                   "button",
                   {
                     staticClass: "btn btn-outline-secondary btn-block",
+                    attrs: { disabled: _vm.inBasketAlready },
                     on: { click: _vm.addToBasket }
                   },
-                  [_vm._v("Book now")]
+                  [_vm._v("\n                    Book now\n                ")]
                 )
               : _vm._e()
-          ])
+          ]),
+          _vm._v(" "),
+          _vm.bookable
+            ? _c("div", [
+                _vm.inBasketAlready
+                  ? _c("div", { staticClass: "mt-4 text-muted warning" }, [
+                      _vm._v(
+                        "\n                    Seems like you have added this object to basket. to change dates remove first remove from basket.\n                "
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e()
         ],
         1
       )

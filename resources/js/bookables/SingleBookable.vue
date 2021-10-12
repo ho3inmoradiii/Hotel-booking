@@ -20,8 +20,19 @@
                     <price-breakdown v-if="price" :price="price" class="mb-4"></price-breakdown>
                 </transition>
                 <transition name="fade">
-                    <button class="btn btn-outline-secondary btn-block" v-if="price" @click="addToBasket">Book now</button>
+                    <button class="btn btn-outline-secondary btn-block"
+                            v-if="price && bookable"
+                            @click="addToBasket"
+                            :disabled="inBasketAlready"
+                    >
+                        Book now
+                    </button>
                 </transition>
+                <div v-if="bookable">
+                    <div v-if="inBasketAlready" class="mt-4 text-muted warning">
+                        Seems like you have added this object to basket. to change dates remove first remove from basket.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -43,15 +54,23 @@
         props:['id'],
         created() {
             axios.get(`/api/bookables/${this.id}`)
-            .then(res => {
-                this.bookable = res.data.data
-            })
-            console.log(this.price)
+                .then(res => {
+                    this.bookable = res.data.data
+                });
         },
         computed:{
             ...mapState({
                 lastSearchComputed: 'lastSearch'
-            })
+            }),
+            inBasketAlready(){
+                if(this.$store.state.basket.items.length === 0){
+                    return false;
+                }
+                const filteredItem = this.$store.state.basket.items.filter(item => item.bookable.id === this.bookable.id);
+                if (Object.keys(filteredItem).length !== 0){
+                    return true;
+                }
+            }
         },
         methods:{
             async checkPrice(hasAvailability){
@@ -71,7 +90,12 @@
                     price: this.price,
                     dates: this.lastSearchComputed
                 });
-            }
+            },
+            // showState(){
+            //     const filteredItem = this.$store.state.basket.items.filter(item => item.bookable.id === this.bookable.id);
+            //
+            //     console.log(Object.keys(filteredItem).length)
+            // }
         }
     }
 </script>
