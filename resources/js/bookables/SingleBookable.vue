@@ -29,6 +29,14 @@
                     </button>
                 </transition>
                 <div v-if="bookable">
+                    <button class="btn btn-secondary btn-block mt-4"
+                            v-if="inBasketAlready"
+                            @click="removeFromBasket"
+                    >
+                        Remove
+                    </button>
+                </div>
+                <div v-if="bookable">
                     <div v-if="inBasketAlready" class="mt-4 text-muted warning">
                         Seems like you have added this object to basket. to change dates remove first remove from basket.
                     </div>
@@ -85,17 +93,20 @@
                 }
             },
             addToBasket(){
-                this.$store.commit('addToBasket',{
+                this.$store.dispatch('addToBasket',{
                     bookable: this.bookable,
                     price: this.price,
                     dates: this.lastSearchComputed
                 });
             },
-            // showState(){
-            //     const filteredItem = this.$store.state.basket.items.filter(item => item.bookable.id === this.bookable.id);
-            //
-            //     console.log(Object.keys(filteredItem).length)
-            // }
+            removeFromBasket(){
+                this.$store.dispatch('removeFromBasket',{
+                    id: this.bookable.id
+                });
+            },
+            showState(){
+                console.log(this.$store.state.basket)
+            }
         }
     }
 </script>

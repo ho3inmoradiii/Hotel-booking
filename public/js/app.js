@@ -2521,6 +2521,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2600,17 +2608,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }))();
     },
     addToBasket: function addToBasket() {
-      this.$store.commit('addToBasket', {
+      this.$store.dispatch('addToBasket', {
         bookable: this.bookable,
         price: this.price,
         dates: this.lastSearchComputed
       });
-    } // showState(){
-    //     const filteredItem = this.$store.state.basket.items.filter(item => item.bookable.id === this.bookable.id);
-    //
-    //     console.log(Object.keys(filteredItem).length)
-    // }
-
+    },
+    removeFromBasket: function removeFromBasket() {
+      this.$store.dispatch('removeFromBasket', {
+        id: this.bookable.id
+      });
+    },
+    showState: function showState() {
+      console.log(this.$store.state.basket);
+    }
   }
 });
 
@@ -2921,6 +2932,9 @@ var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_6__["default"],
   components: {
     index: _Index__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  beforeCreate: function beforeCreate() {
+    this.$store.dispatch("loadStoredState");
   }
 });
 
@@ -3106,9 +3120,34 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       state.basket.items.push(payload);
     },
     removeFromBasket: function removeFromBasket(state, payload) {
+      // console.log(payload.id);
       state.basket.items = state.basket.items.filter(function (item) {
-        return item.bookable.id !== payload;
+        return item.bookable.id !== payload.id;
       });
+    },
+    setBasket: function setBasket(state, payload) {
+      state.basket = payload;
+    }
+  },
+  actions: {
+    loadStoredState: function loadStoredState(context) {
+      var basket = localStorage.getItem('basket');
+
+      if (basket) {
+        context.commit('setBasket', JSON.parse(basket));
+      }
+    },
+    addToBasket: function addToBasket(_ref, payload) {
+      var commit = _ref.commit,
+          state = _ref.state;
+      commit('addToBasket', payload);
+      localStorage.setItem('basket', JSON.stringify(state.basket));
+    },
+    removeFromBasket: function removeFromBasket(_ref2, payload) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+      commit('removeFromBasket', payload);
+      localStorage.setItem('basket', JSON.stringify(state.basket));
     }
   },
   getters: {
@@ -41478,6 +41517,21 @@ var render = function() {
                 )
               : _vm._e()
           ]),
+          _vm._v(" "),
+          _vm.bookable
+            ? _c("div", [
+                _vm.inBasketAlready
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary btn-block mt-4",
+                        on: { click: _vm.removeFromBasket }
+                      },
+                      [_vm._v("\n                    Remove\n                ")]
+                    )
+                  : _vm._e()
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm.bookable
             ? _c("div", [
