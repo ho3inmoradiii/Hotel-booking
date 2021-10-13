@@ -4,6 +4,7 @@ import Bookables from "./bookables/Bookables";
 import ExampleCmp from "./components/ExampleCmp";
 import SingleBookable from "./bookables/SingleBookable";
 import TheReview from "./review/TheReview";
+import TheBasket from "./basket/TheBasket";
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,7 @@ const routes = [
     { name:'bookable', path: '/bookable/:id', component: SingleBookable, props:true },
     { name:'review', path: '/review/:id', component: TheReview },
     { name:'second', path: '/second', component: ExampleCmp },
+    { name:'basket', path: '/basket', component: TheBasket },
 ]
 
 const router = new VueRouter({
