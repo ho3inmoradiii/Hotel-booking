@@ -5,27 +5,57 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="fName">First name</label>
-                        <input id="fName" type="text" class="form-control" v-model="customer.first_name">
+                        <input id="fName"
+                               type="text"
+                               class="form-control"
+                               v-model="customer.first_name"
+                               :class="[{'is-invalid':errorFor('customer.first_name')}]"
+                        >
+                        <validation-errors :errors="errorFor('customer.first_name')"></validation-errors>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lName">Last name</label>
-                        <input id="lName" type="text" class="form-control" v-model="customer.last_name">
+                        <input id="lName"
+                               type="text"
+                               class="form-control"
+                               v-model="customer.last_name"
+                               :class="[{'is-invalid':errorFor('customer.last_name')}]"
+                        >
+                        <validation-errors :errors="errorFor('customer.last_name')"></validation-errors>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label for="email">Email</label>
-                        <input id="email" type="email" class="form-control" v-model="customer.email">
+                        <input id="email"
+                               type="email"
+                               class="form-control"
+                               v-model="customer.email"
+                               :class="[{'is-invalid':errorFor('customer.email')}]"
+                        >
+                        <validation-errors :errors="errorFor('customer.email')"></validation-errors>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="city">City</label>
-                        <input id="city" type="text" class="form-control" v-model="customer.city">
+                        <input id="city"
+                               type="text"
+                               class="form-control"
+                               v-model="customer.city"
+                               :class="[{'is-invalid':errorFor('customer.city')}]"
+                        >
+                        <validation-errors :errors="errorFor('customer.city')"></validation-errors>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="street">Street</label>
-                        <input id="street" type="text" class="form-control" v-model="customer.street">
+                        <input id="street"
+                               type="text"
+                               class="form-control"
+                               v-model="customer.street"
+                               :class="[{'is-invalid':errorFor('customer.street')}]"
+                        >
+                        <validation-errors :errors="errorFor('customer.street')"></validation-errors>
                     </div>
                 </div>
                 <hr>
@@ -34,6 +64,7 @@
                         <button class="btn btn-lg btn-secondary btn-block"
                                 type="submit"
                                 @click.prevent="book"
+                                :disabled="loading"
                         >
                             Book now...
                         </button>
@@ -99,7 +130,8 @@
                     email:null,
                     city:null,
                     street:null,
-                }
+                },
+                errors:null
             }
         },
         computed:{
@@ -116,6 +148,7 @@
             },
             async book(){
                 this.loading = true;
+                this.errors = null;
                 try{
                     await axios.post(`/api/checkout`,{
                         customer:this.customer,
@@ -127,7 +160,7 @@
                     });
                     this.$store.dispatch("clearBasket");
                 }catch(err){
-
+                    this.errors = err.response && err.response.data.errors;
                 }
                 this.loading = false;
             }
