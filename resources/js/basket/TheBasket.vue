@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="row">
+        <the-success v-if="success">
+            Congratulations on your purchase!
+        </the-success>
+        <div class="row" v-else>
             <div class="col-md-8" v-if="itemsInBasket">
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -131,14 +134,18 @@
                     city:null,
                     street:null,
                 },
-                errors:null
+                errors:null,
+                bookingAttempted:false,
             }
         },
         computed:{
             ...mapGetters(['itemsInBasket']),
             ...mapState({
                 basket: state => state.basket.items
-            })
+            }),
+            success(){
+                return !this.loading && this.itemsInBasket === 0 && this.bookingAttempted;
+            }
         },
         methods:{
             removeItem(id){
@@ -149,6 +156,7 @@
             async book(){
                 this.loading = true;
                 this.errors = null;
+                this.bookingAttempted = false;
                 try{
                     await axios.post(`/api/checkout`,{
                         customer:this.customer,
@@ -163,6 +171,7 @@
                     this.errors = err.response && err.response.data.errors;
                 }
                 this.loading = false;
+                this.bookingAttempted = true;
             }
         }
     }
