@@ -15,3 +15,5 @@ Route::get('/booking-by-review/{reviewKey}',\App\Http\Controllers\Api\BookingByR
 
 Route::get('bookables/{bookable}/price',\App\Http\Controllers\Api\BookablePriceController::class)
     ->name('bookables.price.show');
+
+Route::post('checkout',\App\Http\Controllers\Api\CheckoutController::class);

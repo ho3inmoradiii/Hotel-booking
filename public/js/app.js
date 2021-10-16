@@ -2175,6 +2175,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['itemsInBasket'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
@@ -41278,7 +41314,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [_vm._v("Checkout")]),
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
@@ -41300,89 +41336,167 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._l(_vm.basket, function(item) {
-            return _c("div", { key: item.bookable.id }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "pt-2 pb-2 border-top d-flex justify-content-between"
-                },
-                [
-                  _c(
-                    "span",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "bookable",
-                              params: { id: item.bookable.id }
-                            }
-                          }
-                        },
-                        [_vm._v(_vm._s(item.bookable.title))]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(item.price.total) +
-                        "$\n                    "
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "pt-2 pb-2 d-flex justify-content-between" },
-                [
-                  _c("span", [
-                    _vm._v(
-                      "\n                        From: " +
-                        _vm._s(item.dates.from) +
-                        "\n                    "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [
-                    _vm._v(
-                      "\n                        To: " +
-                        _vm._s(item.dates.to) +
-                        "\n                    "
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "pt-2 pb-2 text-right" }, [
+          _c(
+            "transition-group",
+            { attrs: { name: "fade" } },
+            _vm._l(_vm.basket, function(item) {
+              return _c("div", { key: item.bookable.id }, [
                 _c(
-                  "button",
+                  "div",
                   {
-                    staticClass: "btn btn-small btn-outline-secondary",
-                    on: {
-                      click: function($event) {
-                        return _vm.removeItem(item.bookable.id)
-                      }
-                    }
+                    staticClass:
+                      "pt-2 pb-2 border-top d-flex justify-content-between"
                   },
-                  [_c("i", { staticClass: "fas fa-trash-alt" })]
-                )
+                  [
+                    _c(
+                      "span",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "bookable",
+                                params: { id: item.bookable.id }
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(item.bookable.title))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "font-weight-bold" }, [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(item.price.total) +
+                          "$\n                    "
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "pt-2 pb-2 d-flex justify-content-between" },
+                  [
+                    _c("span", [
+                      _vm._v(
+                        "\n                        From: " +
+                          _vm._s(item.dates.from) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(
+                        "\n                        To: " +
+                          _vm._s(item.dates.to) +
+                          "\n                    "
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "pt-2 pb-2 text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-small btn-outline-secondary",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeItem(item.bookable.id)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-trash-alt" })]
+                  )
+                ])
               ])
-            ])
-          })
+            }),
+            0
+          )
         ],
-        2
+        1
       )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { attrs: { for: "fName" } }, [_vm._v("First name")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { id: "fName", type: "text" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { attrs: { for: "lName" } }, [_vm._v("Last name")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { id: "lName", type: "text" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-12" }, [
+          _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { id: "email", type: "email" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { attrs: { for: "city" } }, [_vm._v("City")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { id: "city", type: "text" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { attrs: { for: "street" } }, [_vm._v("Street")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { id: "street", type: "text" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12 form-group" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-lg btn-secondary btn-block",
+              attrs: { type: "submit" }
+            },
+            [_vm._v("Book now...")]
+          )
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
