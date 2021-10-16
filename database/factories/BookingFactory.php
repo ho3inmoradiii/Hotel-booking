@@ -29,6 +29,7 @@ class BookingFactory extends Factory
             'from' => $from,
             'to' => $to,
             'bookable_id'=> Bookable::all()->random()->id,
+            'price' => rand(200,5000)
         ];
     }
 }

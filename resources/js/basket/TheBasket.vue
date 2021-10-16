@@ -1,38 +1,48 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8" v-if="itemsInBasket">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="fName">First name</label>
-                        <input id="fName" type="text" class="form-control">
+                        <input id="fName" type="text" class="form-control" v-model="customer.first_name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lName">Last name</label>
-                        <input id="lName" type="text" class="form-control">
+                        <input id="lName" type="text" class="form-control" v-model="customer.last_name">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label for="email">Email</label>
-                        <input id="email" type="email" class="form-control">
+                        <input id="email" type="email" class="form-control" v-model="customer.email">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="city">City</label>
-                        <input id="city" type="text" class="form-control">
+                        <input id="city" type="text" class="form-control" v-model="customer.city">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="street">Street</label>
-                        <input id="street" type="text" class="form-control">
+                        <input id="street" type="text" class="form-control" v-model="customer.street">
                     </div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-12 form-group">
-                        <button class="btn btn-lg btn-secondary btn-block" type="submit">Book now...</button>
+                        <button class="btn btn-lg btn-secondary btn-block"
+                                type="submit"
+                                @click.prevent="book"
+                        >
+                            Book now...
+                        </button>
                     </div>
+                </div>
+            </div>
+            <div v-else class="col-md-8">
+                <div class="jumbotron jumbotron-fluid text-center">
+                    <h1>Empty</h1>
                 </div>
             </div>
             <div class="col-md-4">
@@ -76,8 +86,22 @@
 
 <script>
     import {mapGetters,mapState} from 'vuex';
+    import validationErrors from './../shared/mixins/validationError';
 
     export default {
+        mixins:[validationErrors],
+        data(){
+            return{
+                loading:false,
+                customer:{
+                    first_name:null,
+                    last_name:null,
+                    email:null,
+                    city:null,
+                    street:null,
+                }
+            }
+        },
         computed:{
             ...mapGetters(['itemsInBasket']),
             ...mapState({
@@ -89,6 +113,23 @@
                 this.$store.dispatch('removeFromBasket',{
                     id:id
                 })
+            },
+            async book(){
+                this.loading = true;
+                try{
+                    await axios.post(`/api/checkout`,{
+                        customer:this.customer,
+                        bookings:this.basket.map(basketItem => ({
+                                bookable_id : basketItem.bookable.id,
+                                from: basketItem.dates.from,
+                                to: basketItem.dates.to,
+                        }))
+                    });
+                    this.$store.dispatch("clearBasket");
+                }catch(err){
+
+                }
+                this.loading = false;
             }
         }
     }

@@ -32,6 +32,10 @@ class Booking extends Model
         return $this->hasOne(Review::class);
     }
 
+    public function address(){
+        return $this->belongsTo(Address::class);
+    }
+
     public static function findByReviewKey(string $reviewKey){
         return static::where('review_key',$reviewKey)->with('bookable')->get()->first();
     }
