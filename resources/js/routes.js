@@ -14,6 +14,7 @@ const routes = [
     { name:'review', path: '/review/:id', component: TheReview },
     { name:'second', path: '/second', component: ExampleCmp },
     { name:'basket', path: '/basket', component: TheBasket },
+    { name:'login', path: '/auth/login', component: require("./auth/TheLogin").default },
 ]
 
 const router = new VueRouter({

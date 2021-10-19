@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {isLoggedIn, logOut} from './shared/utils/auth';
 
 Vue.use(Vuex);
 
@@ -11,7 +12,9 @@ const store = new Vuex.Store({
         },
         basket:{
             items:[]
-        }
+        },
+        isLoggedIn:false,
+        user:{},
     },
     mutations: {
         setLastSearch(state,payload){
@@ -26,6 +29,12 @@ const store = new Vuex.Store({
         },
         setBasket(state,payload){
             state.basket = payload;
+        },
+        setUser(state,payload){
+            state.user = payload;
+        },
+        setLoggedIn(state,payload){
+            state.isLoggedIn = payload;
         }
     },
     actions:{
@@ -46,6 +55,22 @@ const store = new Vuex.Store({
         clearBasket({commit,state},payload) {
             commit("setBasket",{items:[]});
             localStorage.setItem("basket",JSON.stringify(state.basket));
+        },
+        async loadUser({commit,dispatch},payload){
+            if(isLoggedIn()){
+                try{
+                    const user = (await axios.get('/user')).data;
+                    commit("setUser",user);
+                    commit("setLoggedIn",true);
+                }catch(err){
+                    dispatch("logout");
+                }
+            }
+        },
+        logout({commit},payload) {
+            commit("setUser", {});
+            commit("setLoggedIn",false);
+            logOut();
         }
     },
     getters: {

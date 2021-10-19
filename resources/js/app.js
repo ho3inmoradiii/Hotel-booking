@@ -29,7 +29,8 @@ const app = new Vue({
     components:{
         index: Index
     },
-    beforeCreate(){
+    async beforeCreate(){
         this.$store.dispatch("loadStoredState");
+        this.$store.dispatch("loadUser");
     }
 });
