@@ -15,6 +15,7 @@ const routes = [
     { name:'second', path: '/second', component: ExampleCmp },
     { name:'basket', path: '/basket', component: TheBasket },
     { name:'login', path: '/auth/login', component: require("./auth/TheLogin").default },
+    { name:'register', path: '/auth/signup', component: require("./auth/TheSignup").default },
 ]
 
 const router = new VueRouter({
