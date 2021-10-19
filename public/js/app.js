@@ -3276,6 +3276,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_components_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./shared/components/ValidationErrors */ "./resources/js/shared/components/ValidationErrors.vue");
 /* harmony import */ var _shared_components_TheSuccess__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/components/TheSuccess */ "./resources/js/shared/components/TheSuccess.vue");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+var _this = undefined;
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3298,6 +3300,15 @@ Vue.component('star-rating', _shared_components_StarRating__WEBPACK_IMPORTED_MOD
 Vue.component('fatal-error', _shared_components_FatalError__WEBPACK_IMPORTED_MODULE_4__["default"]);
 Vue.component('validation-errors', _shared_components_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__["default"]);
 Vue.component('the-success', _shared_components_TheSuccess__WEBPACK_IMPORTED_MODULE_6__["default"]);
+window.axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status === 401) {
+    _this.$store.dispatch("logout");
+  }
+
+  return Promise.reject(error);
+});
 var app = new Vue({
   el: '#app',
   router: _routes__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -3306,16 +3317,16 @@ var app = new Vue({
     index: _Index__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   beforeCreate: function beforeCreate() {
-    var _this = this;
+    var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.$store.dispatch("loadStoredState");
+              _this2.$store.dispatch("loadStoredState");
 
-              _this.$store.dispatch("loadUser");
+              _this2.$store.dispatch("loadUser");
 
             case 2:
             case "end":
@@ -3628,7 +3639,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
               case 10:
                 _context.prev = 10;
                 _context.t0 = _context["catch"](2);
-                dispatch("logout");
+                // if (err.response.status === 401){
+                dispatch("logout"); // }
 
               case 13:
               case "end":

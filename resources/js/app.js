@@ -22,6 +22,19 @@ Vue.component('fatal-error',FatalError);
 Vue.component('validation-errors',ValidationErrors);
 Vue.component('the-success',TheSuccess);
 
+window.axios.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if(error.response.status === 401) {
+            this.$store.dispatch("logout");
+        }
+
+        return Promise.reject(error);
+    }
+)
+
 const app = new Vue({
     el: '#app',
     router,

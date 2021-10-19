@@ -63,7 +63,9 @@ const store = new Vuex.Store({
                     commit("setUser",user);
                     commit("setLoggedIn",true);
                 }catch(err){
-                    dispatch("logout");
+                    // if (err.response.status === 401){
+                        dispatch("logout");
+                    // }
                 }
             }
         },
