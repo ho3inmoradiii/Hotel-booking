@@ -45,4 +45,9 @@ class LoginController extends Controller
             return response(null,204);
         }
     }
+
+    protected function loggedOut(Request $request)
+    {
+
+    }
 }
