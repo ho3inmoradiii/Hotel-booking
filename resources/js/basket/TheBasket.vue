@@ -149,6 +149,7 @@
         },
         methods:{
             removeItem(id){
+                this.$toast.success("Deletion completed successfully");
                 this.$store.dispatch('removeFromBasket',{
                     id:id
                 })

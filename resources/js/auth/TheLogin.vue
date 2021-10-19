@@ -55,6 +55,9 @@
                 loading:false,
             }
         },
+        created() {
+            return this.pushIfUnauthenticated();
+        },
         methods:{
             async login(){
                 this.loading = true;
@@ -68,12 +71,18 @@
                     });
                     logIn();
                     this.$store.dispatch("loadUser");
+                    this.$toast.success("The login was successful");
                     this.$router.push({name:'home'});
                 }catch(err){
                     this.errors = err.response && err.response.data.errors;
                 }
 
                 this.loading = false;
+            },
+            pushIfUnauthenticated(){
+                if (this.$store.state.isLoggedIn){
+                    this.$router.push({name:'home'})
+                }
             }
         }
     }

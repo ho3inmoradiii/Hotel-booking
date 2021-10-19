@@ -75,6 +75,9 @@
                 loading:false,
             }
         },
+        created() {
+            return this.pushIfUnauthenticated();
+        },
         methods:{
             async signup(){
                 this.loading = true;
@@ -85,6 +88,7 @@
                     if (response.status === 201) {
                         logIn();
                         this.$store.dispatch("loadUser");
+                        this.$toast.success("The sign up was successful");
                         this.$router.push({name:'home'});
                     }
                 }catch(err){
@@ -92,6 +96,11 @@
                 }
 
                 this.loading = false;
+            },
+            pushIfUnauthenticated(){
+                if (this.$store.state.isLoggedIn){
+                    this.$router.push({name:'home'})
+                }
             }
         }
     }

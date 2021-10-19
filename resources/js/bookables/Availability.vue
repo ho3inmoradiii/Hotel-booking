@@ -39,7 +39,7 @@
                 <validation-errors :errors="errorFor('to')"></validation-errors>
             </div>
 
-            <button class="btn btn-secondary btn-block" :disabled="loading" @click="check">
+            <button class="btn btn-secondary btn-block" :disabled="loading" @click="check()">
                 <span v-if="!loading">Check!</span>
                 <span v-else>
                     <i class="fas fa-cog fa-spin"></i> Checking...
@@ -82,7 +82,7 @@
             },
             errorFor(field){
                 return this.hasError && this.error[field] ? this.error[field] : null;
-            }
+            },
         },
         computed:{
             hasError(){
@@ -93,7 +93,7 @@
             },
             noAvailability(){
                 return this.status === 404;
-            }
+            },
         }
     }
 </script>

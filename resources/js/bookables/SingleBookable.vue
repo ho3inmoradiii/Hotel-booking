@@ -22,7 +22,7 @@
                 <transition name="fade">
                     <button class="btn btn-outline-secondary btn-block"
                             v-if="price && bookable"
-                            @click="addToBasket"
+                            @click="isLoggedIn ? addToBasket() : pushToLogin()"
                             :disabled="inBasketAlready"
                     >
                         Book now
@@ -31,7 +31,7 @@
                 <div v-if="bookable">
                     <button class="btn btn-secondary btn-block mt-4"
                             v-if="inBasketAlready"
-                            @click="removeFromBasket"
+                            @click="isLoggedIn ? removeFromBasket() : pushToLogin()"
                     >
                         Remove
                     </button>
@@ -68,7 +68,8 @@
         },
         computed:{
             ...mapState({
-                lastSearchComputed: 'lastSearch'
+                lastSearchComputed: 'lastSearch',
+                isLoggedIn: 'isLoggedIn'
             }),
             inBasketAlready(){
                 if(this.$store.state.basket.items.length === 0){
@@ -93,6 +94,7 @@
                 }
             },
             addToBasket(){
+                this.$toast.success("Add to cart completed successfully");
                 this.$store.dispatch('addToBasket',{
                     bookable: this.bookable,
                     price: this.price,
@@ -100,12 +102,17 @@
                 });
             },
             removeFromBasket(){
+                this.$toast.success("Deletion completed successfully");
                 this.$store.dispatch('removeFromBasket',{
                     id: this.bookable.id
                 });
             },
             showState(){
                 console.log(this.$store.state.basket)
+            },
+            pushToLogin(){
+                this.$toast.warning("You must log in first");
+                this.$router.push({name:'login'});
             }
         }
     }

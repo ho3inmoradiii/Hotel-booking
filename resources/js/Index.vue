@@ -6,7 +6,7 @@
             </router-link>
 
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item" v-if="isLoggedIn">
                     <router-link class="btn nav-button" :to="{name:'basket'}">
                         Basket
                         <span class="badge badge-secondary" v-if="itemsInBasket">{{ itemsInBasket }}</span>
@@ -55,8 +55,10 @@
             async logout(){
                 try {
                     await axios.post('/logout');
+                    this.$toast.success("The logout was successful");
                     this.$store.dispatch('logout');
                 }catch (e) {
+                    this.$toast.success("The logout was successful");
                     this.$store.dispatch('logout');
                 }
 
