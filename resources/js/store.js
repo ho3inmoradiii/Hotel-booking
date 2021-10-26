@@ -75,6 +75,32 @@ const store = new Vuex.Store({
             commit("setUser", {});
             commit("setLoggedIn",false);
             logOut();
+        },
+        loginUserGoogle(){
+            return new Promise((resolve,reject) => {
+                axios.get('/login/google')
+                    .then((res) => {
+                        resolve(res);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    })
+            })
+        },
+        loginGoogleCallback(context,payload){
+            // console.log(payload.code);
+            return new Promise((resolve,reject) => {
+                axios.get('/login/google/callback',{
+                    params:payload.code
+                })
+                    .then((res) => {
+                        console.log(res);
+                        resolve(res);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    })
+            })
         }
     },
     getters: {

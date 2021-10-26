@@ -2181,6 +2181,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/LoginGoogle.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/LoginGoogle.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+    login: 'loginGoogleCallback'
+  })), {}, {
+    loginUser: function loginUser() {
+      // console.log(this.$route.query.code)
+      this.login({
+        code: this.$route.query.code
+      }).then(function (res) {// console.log(res);
+      });
+    }
+  }),
+  created: function created() {
+    this.loginUser();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/TheLogin.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/TheLogin.vue?vue&type=script&lang=js& ***!
@@ -2202,6 +2246,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -2319,6 +2365,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           name: 'home'
         });
       }
+    },
+    LoginGoogle: function LoginGoogle() {
+      window.location.href = '/login/google'; // this.$store.dispatch("loginUserGoogle").then((res) => {
+      //     //console.log(res)
+      //     if (res.data.url){
+      //         window.location.href = res.data.url
+      //         // console.log(res.data.url)
+      //     }
+      // })
     }
   }
 });
@@ -2897,11 +2952,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     title: String,
     description: String,
-    id: Number
+    id: Number,
+    price: Number
   }
 });
 
@@ -2919,6 +2981,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _BookableListItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookableListItem */ "./resources/js/bookables/BookableListItem.vue");
+//
 //
 //
 //
@@ -2958,6 +3021,37 @@ __webpack_require__.r(__webpack_exports__);
       _this.loading = false;
     })["catch"](function (error) {
       return console.log(error.response.data);
+    });
+    this.$store.dispatch("loadUser");
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Home.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Home.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _shared_utils_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../shared/utils/auth */ "./resources/js/shared/utils/auth.js");
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  created: function created() {
+    (0,_shared_utils_auth__WEBPACK_IMPORTED_MODULE_0__.logIn)();
+    this.$store.dispatch("loadUser");
+    this.$toast.success("The login was successful");
+    this.$router.push({
+      name: 'home'
     });
   }
 });
@@ -3526,6 +3620,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
 /* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
 var _this = undefined;
 
 
@@ -3549,6 +3645,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
  // Import the CSS or use your own!
 
 
+ // import VueAxios from 'vue-axios';
+// import VueSocialauth from 'vue-social-auth';
+
 var options = {
   position: "top-center",
   timeout: 3000,
@@ -3563,7 +3662,17 @@ var options = {
   icon: true,
   rtl: false
 };
-Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_8__["default"], options);
+Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_8__["default"], options); // Vue.use(VueAxios, axios)
+// Vue.use(VueSocialauth, {
+//
+//     providers: {
+//         google: {
+//             clientId: '1047287869682-mbrj4fcgjmgleindrskdbo5ap8c9kpvh.apps.googleusercontent.com',
+//             redirectUri: 'http://127.0.0.1:8000/api/auth/google/callback' // Your client app URL
+//         }
+//     }
+// })
+
 Vue.component('star-rating', _shared_components_StarRating__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.component('fatal-error', _shared_components_FatalError__WEBPACK_IMPORTED_MODULE_4__["default"]);
 Vue.component('validation-errors', _shared_components_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__["default"]);
@@ -3664,8 +3773,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _bookables_Bookables__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bookables/Bookables */ "./resources/js/bookables/Bookables.vue");
 /* harmony import */ var _components_ExampleCmp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ExampleCmp */ "./resources/js/components/ExampleCmp.vue");
 /* harmony import */ var _bookables_SingleBookable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bookables/SingleBookable */ "./resources/js/bookables/SingleBookable.vue");
@@ -3674,6 +3783,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_TheLogin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth/TheLogin */ "./resources/js/auth/TheLogin.vue");
 /* harmony import */ var _auth_TheSignup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth/TheSignup */ "./resources/js/auth/TheSignup.vue");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _auth_LoginGoogle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth/LoginGoogle */ "./resources/js/auth/LoginGoogle.vue");
+/* harmony import */ var _bookables_Home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./bookables/Home */ "./resources/js/bookables/Home.vue");
 
 
 
@@ -3684,11 +3795,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_8__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_9__["default"]);
+
+
+vue__WEBPACK_IMPORTED_MODULE_10__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_11__["default"]);
 var routes = [{
   name: 'home',
   path: '/',
   component: _bookables_Bookables__WEBPACK_IMPORTED_MODULE_0__["default"]
+}, {
+  name: 'homeAfterLoginGoogle',
+  path: '/home',
+  component: _bookables_Home__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   name: 'bookable',
   path: '/bookable/:id',
@@ -3711,6 +3828,10 @@ var routes = [{
       name: 'login'
     });else next();
   }
+}, {
+  name: 'loginGoogle',
+  path: '/login/google/callback',
+  component: _auth_LoginGoogle__WEBPACK_IMPORTED_MODULE_8__["default"]
 }, {
   name: 'login',
   path: '/auth/login',
@@ -3736,8 +3857,13 @@ var routes = [{
       name: 'home'
     });else next();
   }
+}, {
+  path: '/auth/:provider/callback',
+  component: {
+    template: '<div class="auth-component"></div>'
+  }
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_9__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_11__["default"]({
   mode: 'history',
   routes: routes // short for `routes: routes`
 
@@ -3957,6 +4083,28 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
       commit("setUser", {});
       commit("setLoggedIn", false);
       (0,_shared_utils_auth__WEBPACK_IMPORTED_MODULE_1__.logOut)();
+    },
+    loginUserGoogle: function loginUserGoogle() {
+      return new Promise(function (resolve, reject) {
+        axios.get('/login/google').then(function (res) {
+          resolve(res);
+        })["catch"](function (error) {
+          reject(error);
+        });
+      });
+    },
+    loginGoogleCallback: function loginGoogleCallback(context, payload) {
+      // console.log(payload.code);
+      return new Promise(function (resolve, reject) {
+        axios.get('/login/google/callback', {
+          params: payload.code
+        }).then(function (res) {
+          console.log(res);
+          resolve(res);
+        })["catch"](function (error) {
+          reject(error);
+        });
+      });
     }
   },
   getters: {
@@ -8499,7 +8647,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bookableBox[data-v-665ee471] {\n    border: 1px solid #cccccc;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px;\n    margin-bottom: 40px;\n    height: 300px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bookableBox[data-v-665ee471] {\n    border: 1px solid #cccccc;\n    display: flex;\n    justify-content: space-between;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px;\n    margin-bottom: 40px;\n    height: 300px;\n}\n.priceBox[data-v-665ee471]{\n    display: flex;\n    justify-content: space-between;\n    direction: ltr;\n    width: 100%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40942,6 +41090,45 @@ component.options.__file = "resources/js/Index.vue"
 
 /***/ }),
 
+/***/ "./resources/js/auth/LoginGoogle.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/auth/LoginGoogle.vue ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _LoginGoogle_vue_vue_type_template_id_36826bf9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginGoogle.vue?vue&type=template&id=36826bf9& */ "./resources/js/auth/LoginGoogle.vue?vue&type=template&id=36826bf9&");
+/* harmony import */ var _LoginGoogle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginGoogle.vue?vue&type=script&lang=js& */ "./resources/js/auth/LoginGoogle.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LoginGoogle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LoginGoogle_vue_vue_type_template_id_36826bf9___WEBPACK_IMPORTED_MODULE_0__.render,
+  _LoginGoogle_vue_vue_type_template_id_36826bf9___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/auth/LoginGoogle.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/auth/TheLogin.vue":
 /*!****************************************!*\
   !*** ./resources/js/auth/TheLogin.vue ***!
@@ -41180,6 +41367,45 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/bookables/Bookables.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/bookables/Home.vue":
+/*!*****************************************!*\
+  !*** ./resources/js/bookables/Home.vue ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Home_vue_vue_type_template_id_412f54c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home.vue?vue&type=template&id=412f54c8& */ "./resources/js/bookables/Home.vue?vue&type=template&id=412f54c8&");
+/* harmony import */ var _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home.vue?vue&type=script&lang=js& */ "./resources/js/bookables/Home.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Home_vue_vue_type_template_id_412f54c8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Home_vue_vue_type_template_id_412f54c8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/bookables/Home.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -41553,6 +41779,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/auth/LoginGoogle.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/auth/LoginGoogle.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginGoogle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LoginGoogle.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/LoginGoogle.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginGoogle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/auth/TheLogin.vue?vue&type=script&lang=js&":
 /*!*****************************************************************!*\
   !*** ./resources/js/auth/TheLogin.vue?vue&type=script&lang=js& ***!
@@ -41646,6 +41888,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookables_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Bookables.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Bookables.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookables_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/bookables/Home.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/bookables/Home.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Home.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -41869,6 +42127,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/auth/LoginGoogle.vue?vue&type=template&id=36826bf9&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/auth/LoginGoogle.vue?vue&type=template&id=36826bf9& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginGoogle_vue_vue_type_template_id_36826bf9___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginGoogle_vue_vue_type_template_id_36826bf9___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginGoogle_vue_vue_type_template_id_36826bf9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LoginGoogle.vue?vue&type=template&id=36826bf9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/LoginGoogle.vue?vue&type=template&id=36826bf9&");
+
+
+/***/ }),
+
 /***/ "./resources/js/auth/TheLogin.vue?vue&type=template&id=65352511&":
 /*!***********************************************************************!*\
   !*** ./resources/js/auth/TheLogin.vue?vue&type=template&id=65352511& ***!
@@ -41967,6 +42242,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookables_vue_vue_type_template_id_7a867923___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookables_vue_vue_type_template_id_7a867923___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Bookables.vue?vue&type=template&id=7a867923& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Bookables.vue?vue&type=template&id=7a867923&");
+
+
+/***/ }),
+
+/***/ "./resources/js/bookables/Home.vue?vue&type=template&id=412f54c8&":
+/*!************************************************************************!*\
+  !*** ./resources/js/bookables/Home.vue?vue&type=template&id=412f54c8& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_412f54c8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_412f54c8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_412f54c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Home.vue?vue&type=template&id=412f54c8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Home.vue?vue&type=template&id=412f54c8&");
 
 
 /***/ }),
@@ -42259,6 +42551,38 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/LoginGoogle.vue?vue&type=template&id=36826bf9&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/LoginGoogle.vue?vue&type=template&id=36826bf9& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h5", [_vm._v("Login with google, please wait.")])])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/TheLogin.vue?vue&type=template&id=65352511&":
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/auth/TheLogin.vue?vue&type=template&id=65352511& ***!
@@ -42383,7 +42707,9 @@ var render = function() {
             "div",
             { staticClass: "text-nowrap" },
             [
-              _vm._v("\n                No account yet?\n\n                "),
+              _vm._v(
+                "\n                    No account yet?\n\n                    "
+              ),
               _c(
                 "router-link",
                 {
@@ -42401,7 +42727,7 @@ var render = function() {
             { staticClass: "text-nowrap" },
             [
               _vm._v(
-                "\n                Forget your password?\n\n                "
+                "\n                    Forget your password?\n\n                    "
               ),
               _c(
                 "router-link",
@@ -42415,7 +42741,11 @@ var render = function() {
             1
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.LoginGoogle } }, [
+        _vm._v("Login with google")
+      ])
     ])
   ])
 }
@@ -43274,7 +43604,15 @@ var render = function() {
           [_c("h3", [_vm._v(_vm._s(_vm.title))])]
         ),
         _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.description))])
+        _c("p", [_vm._v(_vm._s(_vm.description))]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "priceBox" }, [
+          _c("h5", [_vm._v("Price:")]),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.price) + "$ per day")])
+        ])
       ],
       1
     )
@@ -43317,6 +43655,7 @@ var render = function() {
                 title: bookable.title,
                 description: bookable.description,
                 id: bookable.id,
+                price: bookable.price,
                 price: bookable.price
               }
             })
@@ -43324,6 +43663,31 @@ var render = function() {
           1
         )
       ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Home.vue?vue&type=template&id=412f54c8&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/bookables/Home.vue?vue&type=template&id=412f54c8& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true

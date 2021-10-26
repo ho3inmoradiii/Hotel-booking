@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
 Route::apiResource('/bookables',\App\Http\Controllers\Api\BookableController::class)->only(['index','show']);
 Route::get('bookables/{bookable}/availability',\App\Http\Controllers\Api\BookableAvailabilityController::class)
@@ -17,3 +18,7 @@ Route::get('bookables/{bookable}/price',\App\Http\Controllers\Api\BookablePriceC
     ->name('bookables.price.show');
 
 Route::post('checkout',\App\Http\Controllers\Api\CheckoutController::class);
+
+//Route::post('sociallogin/{provider}', [AuthController::class,'SocialSignup']);
+//Route::get('auth/{provider}/callback', [OutController::class,'index'])->where('provider', '.*');
+

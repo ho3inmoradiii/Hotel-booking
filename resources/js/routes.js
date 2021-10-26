@@ -8,11 +8,14 @@ import TheBasket from "./basket/TheBasket";
 import TheLogin from "./auth/TheLogin";
 import TheSignup from "./auth/TheSignup";
 import store from "./store";
+import LoginGoogle from './auth/LoginGoogle';
+import Home from "./bookables/Home";
 
 Vue.use(VueRouter)
 
 const routes = [
     { name:'home', path: '/', component: Bookables },
+    { name:'homeAfterLoginGoogle', path: '/home', component: Home },
     { name:'bookable', path: '/bookable/:id', component: SingleBookable, props:true },
     { name:'review', path: '/review/:id', component: TheReview },
     { name:'second', path: '/second', component: ExampleCmp },
@@ -24,6 +27,11 @@ const routes = [
             if (!store.state.isLoggedIn) next({ name: 'login' })
             else next()
         }
+    },
+    {
+        name:'loginGoogle',
+        path: '/login/google/callback',
+        component: LoginGoogle,
     },
     {
         name:'login',
@@ -48,6 +56,12 @@ const routes = [
         beforeEnter: (to, from, next) => {
             if (store.state.isLoggedIn) next({ name: 'home' })
             else next()
+        }
+    },
+    {
+        path: '/auth/:provider/callback',
+        component: {
+            template: '<div class="auth-component"></div>'
         }
     },
 ]

@@ -39,6 +39,8 @@
                     <router-link :to="{name:'home'}" class="font-weight-bold">Reset password</router-link>
                 </div>
             </form>
+<!--            <a href="http://127.0.0.1:8000/api/login/google">Login with google</a>-->
+            <button @click="LoginGoogle">Login with google</button>
         </div>
     </div>
 </template>
@@ -83,6 +85,16 @@
                 if (this.$store.state.isLoggedIn){
                     this.$router.push({name:'home'})
                 }
+            },
+            LoginGoogle(){
+                window.location.href = '/login/google'
+                // this.$store.dispatch("loginUserGoogle").then((res) => {
+                //     //console.log(res)
+                //     if (res.data.url){
+                //         window.location.href = res.data.url
+                //         // console.log(res.data.url)
+                //     }
+                // })
             }
         }
     }

@@ -10,7 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
+        "axios": "^0.21.4",
         "bootstrap": "^4.6.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.34",
@@ -27,8 +27,10 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "font-awesome": "^4.7.0",
+        "vue-axios": "^3.3.7",
         "vue-route": "^1.5.1",
         "vue-router": "^3.5.2",
+        "vue-social-auth": "^1.4.9",
         "vue-toastification": "^1.7.14",
         "vue-toastr": "^2.1.2",
         "vue2-toast": "^2.1.0",

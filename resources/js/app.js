@@ -17,6 +17,9 @@ import store from './store';
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
+import axios from 'axios';
+// import VueAxios from 'vue-axios';
+// import VueSocialauth from 'vue-social-auth';
 
 const options = {
     position: "top-center",
@@ -35,6 +38,16 @@ const options = {
 
 
 Vue.use(Toast, options);
+// Vue.use(VueAxios, axios)
+// Vue.use(VueSocialauth, {
+//
+//     providers: {
+//         google: {
+//             clientId: '1047287869682-mbrj4fcgjmgleindrskdbo5ap8c9kpvh.apps.googleusercontent.com',
+//             redirectUri: 'http://127.0.0.1:8000/api/auth/google/callback' // Your client app URL
+//         }
+//     }
+// })
 
 
 

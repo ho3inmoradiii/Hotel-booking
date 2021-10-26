@@ -10,6 +10,7 @@
                 :title="bookable.title"
                 :description="bookable.description"
                 :id="bookable.id"
+                :price="bookable.price"
                 v-bind:price="bookable.price"
                 class="col-12 col-lg-4"
             ></bookable-list-item>
@@ -35,6 +36,7 @@
                 this.loading = false
             })
             .catch(error => console.log(error.response.data))
+            this.$store.dispatch("loadUser");
         }
     }
 </script>
