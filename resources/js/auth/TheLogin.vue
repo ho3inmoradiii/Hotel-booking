@@ -1,9 +1,9 @@
 <template>
-    <div class="d-flex w-50 m-auto align-items-center">
-        <div class="card card-body">
+    <div class="d-flex w-50 m-auto align-items-center flex-column">
+        <div class="card card-body w-100">
             <form @submit.prevent="login">
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email" class="label">Email</label>
                     <input id="email"
                            name="email"
                            placeholder="Please enter your email"
@@ -14,7 +14,7 @@
                     <validation-errors :errors="errorFor('email')"></validation-errors>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password" class="label">Password</label>
                     <input id="password"
                            name="password"
                            placeholder="Please enter your password"
@@ -24,24 +24,27 @@
                     >
                     <validation-errors :errors="errorFor('password')"></validation-errors>
                 </div>
-                <button type="submit" class="btn btn-secondary btn-lg btn-block" :disabled="loading">Log in</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" :disabled="loading">Log in</button>
                 <hr />
 
-                <div class="text-nowrap">
+                <div class="text-nowrap loginItem">
                     No account yet?
 
                     <router-link :to="{name:'register'}" class="font-weight-bold">Register</router-link>
                 </div>
 
-                <div class="text-nowrap">
+                <div class="text-nowrap loginItem">
                     Forget your password?
 
                     <router-link :to="{name:'home'}" class="font-weight-bold">Reset password</router-link>
                 </div>
             </form>
 <!--            <a href="http://127.0.0.1:8000/api/login/google">Login with google</a>-->
-            <button @click="LoginGoogle">Login with google</button>
         </div>
+        <button @click="LoginGoogle" class="btn btn-outline-danger mt-4 w-100">
+            <i class="fab fa-google"></i>
+            Login with google
+        </button>
     </div>
 </template>
 

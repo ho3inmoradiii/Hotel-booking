@@ -20,7 +20,7 @@
                     <price-breakdown v-if="price" :price="price" class="mb-4"></price-breakdown>
                 </transition>
                 <transition name="fade">
-                    <button class="btn btn-outline-secondary btn-block"
+                    <button class="btn btn-outline-success btn-block"
                             v-if="price && bookable"
                             @click="isLoggedIn ? addToBasket() : pushToLogin()"
                             :disabled="inBasketAlready"
@@ -29,7 +29,7 @@
                     </button>
                 </transition>
                 <div v-if="bookable">
-                    <button class="btn btn-secondary btn-block mt-4"
+                    <button class="btn btn-success btn-block mt-4 available"
                             v-if="inBasketAlready"
                             @click="isLoggedIn ? removeFromBasket() : pushToLogin()"
                     >
@@ -37,7 +37,7 @@
                     </button>
                 </div>
                 <div v-if="bookable">
-                    <div v-if="inBasketAlready" class="mt-4 text-muted warning">
+                    <div v-if="inBasketAlready" class="mt-4 warning available">
                         Seems like you have added this object to basket. to change dates remove first remove from basket.
                     </div>
                 </div>

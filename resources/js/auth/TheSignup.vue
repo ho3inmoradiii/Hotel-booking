@@ -1,9 +1,9 @@
 <template>
-    <div class="d-flex w-50 m-auto align-items-center">
-        <div class="card card-body">
+    <div class="d-flex w-50 m-auto align-items-center flex-column">
+        <div class="card card-body w-100">
             <form @submit.prevent="signup">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name" class="label">Name</label>
                     <input id="name"
                            name="name"
                            placeholder="Please enter your name"
@@ -12,9 +12,10 @@
                            v-model="user.name"
                     >
                     <validation-errors :errors="errorFor('name')"></validation-errors>
+
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email" class="label">Email</label>
                     <input id="email"
                            name="email"
                            placeholder="Please enter your email"
@@ -25,7 +26,7 @@
                     <validation-errors :errors="errorFor('email')"></validation-errors>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password" class="label">Password</label>
                     <input id="password"
                            name="password"
                            placeholder="Please enter your password"
@@ -36,7 +37,7 @@
                     <validation-errors :errors="errorFor('password')"></validation-errors>
                 </div>
                 <div class="form-group">
-                    <label for="password_confirmation">ReType password</label>
+                    <label for="password_confirmation" class="label">ReType password</label>
                     <input id="password_confirmation"
                            name="password_confirmation"
                            placeholder="Please re enter your password"
@@ -46,16 +47,20 @@
                     >
                     <validation-errors :errors="errorFor('password_confirmation')"></validation-errors>
                 </div>
-                <button type="submit" class="btn btn-secondary btn-lg btn-block" :disabled="loading">Register</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" :disabled="loading">Register</button>
                 <hr />
 
-                <div class="text-nowrap">
+                <div class="text-nowrap loginItem">
                     You have an account?
 
                     <router-link :to="{name:'login'}" class="font-weight-bold">Login</router-link>
                 </div>
             </form>
         </div>
+        <button @click="LoginGoogle" class="btn btn-outline-danger mt-4 w-100">
+            <i class="fab fa-google"></i>
+            Login with google
+        </button>
     </div>
 </template>
 
@@ -101,6 +106,16 @@
                 if (this.$store.state.isLoggedIn){
                     this.$router.push({name:'home'})
                 }
+            },
+            LoginGoogle(){
+                window.location.href = '/login/google'
+                // this.$store.dispatch("loginUserGoogle").then((res) => {
+                //     //console.log(res)
+                //     if (res.data.url){
+                //         window.location.href = res.data.url
+                //         // console.log(res.data.url)
+                //     }
+                // })
             }
         }
     }

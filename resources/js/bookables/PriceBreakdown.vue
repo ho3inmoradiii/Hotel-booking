@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h6 class="text-uppercase text-secondary font-weight-bolder">price breakdown</h6>
+        <h6 class="text-uppercase font-weight-bolder">price breakdown</h6>
 
         <div v-for="(days , price) in price.breakdown"
              :key="price"

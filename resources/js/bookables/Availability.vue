@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h6 class="text-uppercase text-secondary font-weight-holder">
+        <h6 class="text-uppercase font-weight-holder">
             check availability:
             <transition name="fade">
                 <span v-if="hasAvailability" class="text-success font-weight-bold font-italic"> AVAILABLE</span>
@@ -10,7 +10,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="from">From</label>
+                <label for="from" class="label">From</label>
                 <input
                     type="text"
                     id="from"
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="to">To</label>
+                <label for="to" class="label">To</label>
                 <input
                     type="text"
                     id="to"
@@ -39,7 +39,7 @@
                 <validation-errors :errors="errorFor('to')"></validation-errors>
             </div>
 
-            <button class="btn btn-secondary btn-block" :disabled="loading" @click="check()">
+            <button class="btn btn-block btn-success" :disabled="loading" @click="check()" style="margin: 6px;">
                 <span v-if="!loading">Check!</span>
                 <span v-else>
                     <i class="fas fa-cog fa-spin"></i> Checking...
@@ -58,11 +58,15 @@
                 EndDate:null,
                 loading:false,
                 status:null,
-                error:null
+                error:null,
+                classObject: {
+                    'btn-warning': false,
+                    'btn-success': false
+                }
             }
         },
         created() {
-            console.log(this.StartDate)
+            this.getTheme
         },
         methods:{
             async check(){
@@ -83,6 +87,7 @@
             errorFor(field){
                 return this.hasError && this.error[field] ? this.error[field] : null;
             },
+
         },
         computed:{
             hasError(){
@@ -94,6 +99,19 @@
             noAvailability(){
                 return this.status === 404;
             },
+        },
+        watch:{
+            getTheme(){
+                const activeTheme = localStorage.getItem("user-theme");
+                console.log(activeTheme);
+                if (activeTheme === "light-theme") {
+                    this.classObject["btn-success"] = true
+                    this.classObject["btn-warning"] = false
+                } else {
+                    this.classObject["btn-success"] = false
+                    this.classObject["btn-warning"] = true
+                }
+            }
         }
     }
 </script>
@@ -102,7 +120,6 @@
     label{
         font-size: 0.7rem;
         text-transform: uppercase;
-        color: gray;
         font-weight: bolder;
     }
 

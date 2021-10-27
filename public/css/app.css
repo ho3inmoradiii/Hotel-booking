@@ -16127,6 +16127,83 @@ h3 {
     border-color: #dee2e6;
   }
 }
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Define styles for the default root window element */
+:root {
+  --background-color-primary: #ebebeb;
+  --background-color-secondary: #fafafa;
+  --accent-color: #cacaca;
+  --Third-color: rgba(0,0,0,0.5);
+  --text-primary-color: #222;
+  --a-primary-color: green;
+  --element-size: 4rem;
+}
+
+/* Define styles for the root window with dark - mode preference */
+:root.dark-theme {
+  --background-color-primary: #1e1e1e;
+  --background-color-secondary: #2d2d30;
+  --accent-color: #3f3f3f;
+  --Third-color: rgba(255,255,255,0.7);
+  --text-primary-color: #ddd;
+  --a-primary-color: yellow;
+}
+
+p, h6, span, h5, .reviewItem, .loginItem, .available {
+  color: var(--text-primary-color);
+}
+
+.label {
+  color: var(--Third-color);
+}
+
+a, i, .basket {
+  color: var(--a-primary-color);
+}
+
+.basket:hover, a:hover {
+  color: var(--a-primary-color);
+}
+
+.itemBox {
+  background-color: var(--a-primary-color);
+}
+
+.container-center {
+  background-color: var(--background-color-primary);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  background-color: var(--background-color-secondary);
+}
+
+nav.navbar {
+  background-color: var(--background-color-secondary);
+}
+
+body {
+  background-color: var(--background-color-primary);
+}
+
+hr {
+  border: 1px solid var(--accent-color);
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }

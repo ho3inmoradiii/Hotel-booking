@@ -1,13 +1,28 @@
 <template>
-    <div>
-        <nav class="navbar navbar-expand-lg bg-white border-bottom navbar-light">
+    <div class="bodyBox">
+        <nav class="navbar navbar-expand-lg">
             <router-link class="navbar-brand mr-auto" :to="{ name:'home' }">
                 Home
             </router-link>
 
+            <input
+                @change="toggleTheme"
+                id="checkbox"
+                type="checkbox"
+                class="switch-checkbox"
+            />
+            <label for="checkbox" class="switch-label mt-2">
+                <span>☀️</span>
+                <span>🌙</span>
+                <div
+                    class="switch-toggle"
+                    :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }"
+                ></div>
+            </label>
+
             <ul class="navbar-nav">
                 <li class="nav-item" v-if="isLoggedIn">
-                    <router-link class="btn nav-button" :to="{name:'basket'}">
+                    <router-link class="btn nav-button basket" :to="{name:'basket'}">
                         Basket
                         <span class="badge badge-secondary" v-if="itemsInBasket">{{ itemsInBasket }}</span>
                     </router-link>
@@ -39,6 +54,7 @@
         data(){
             return{
                 lastSearch: this.$store.state.lastSearch,
+                userTheme: "light-theme",
             }
         },
         computed:{
@@ -51,6 +67,10 @@
             })
 
         },
+        mounted() {
+            const initUserTheme = this.getMediaPreference();
+            this.setTheme(initUserTheme);
+        },
         methods:{
             async logout(){
                 try {
@@ -62,7 +82,70 @@
                     this.$store.dispatch('logout');
                 }
 
-            }
+            },
+            setTheme(theme) {
+                localStorage.setItem("user-theme", theme);
+                this.userTheme = theme;
+                document.documentElement.className = theme;
+            },
+            toggleTheme() {
+                const activeTheme = localStorage.getItem("user-theme");
+                if (activeTheme === "light-theme") {
+                    this.setTheme("dark-theme");
+                } else {
+                    this.setTheme("light-theme");
+                }
+            },
+            getMediaPreference() {
+                const hasDarkPreference = window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).matches;
+                if (hasDarkPreference) {
+                    return "dark-theme";
+                } else {
+                    return "light-theme";
+                }
+            },
+
         }
     }
 </script>
+
+<style>
+    .switch-checkbox {
+        display: none;
+    }
+
+    .switch-label {
+        /* for width, use the standard element-size */
+        width: var(--element-size);
+        border-radius: var(--element-size);
+        border: calc(var(--element-size) * 0.025) solid var(--accent-color);
+        font-size: calc(var(--element-size) * 0.25);
+        height: calc(var(--element-size) * 0.4);
+        align-items: center;
+        background: var(--text-primary-color);
+        cursor: pointer;
+        display: flex;
+        position: relative;
+        transition: background 0.5s ease;
+        justify-content: space-between;
+        z-index: 1;
+    }
+
+    .switch-toggle {
+        position: absolute;
+        background-color: var(--background-color-primary);
+        border-radius: 50%;
+        left: calc(var(--element-size) * 0.0001);
+        height: calc(var(--element-size) * 0.4);
+        width: calc(var(--element-size) * 0.4);
+        transform: translateX(0);
+        transition: transform 0.3s ease, background-color 0.5s ease;
+    }
+
+    .switch-toggle-checked {
+        transform: translateX(calc(var(--element-size) * 0.6)) !important;
+    }
+
+</style>
