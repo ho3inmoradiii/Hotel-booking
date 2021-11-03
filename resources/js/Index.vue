@@ -1,26 +1,29 @@
 <template>
     <div class="bodyBox">
-        <nav class="navbar navbar-expand-lg">
-            <router-link class="navbar-brand mr-auto" :to="{ name:'home' }">
-                Home
-            </router-link>
+        <nav class="navbar justify-content-between">
 
-            <input
-                @change="toggleTheme"
-                id="checkbox"
-                type="checkbox"
-                class="switch-checkbox"
-            />
-            <label for="checkbox" class="switch-label mt-2">
-                <span>☀️</span>
-                <span>🌙</span>
-                <div
-                    class="switch-toggle"
-                    :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }"
-                ></div>
-            </label>
 
-            <ul class="navbar-nav">
+            <div class="d-flex justify-content-between logoBox">
+                <router-link class="navbar-brand mr-auto" :to="{ name:'home' }">
+                    Home
+                </router-link>
+                <input
+                    @change="toggleTheme"
+                    id="checkbox"
+                    type="checkbox"
+                    class="switch-checkbox"
+                />
+                <label for="checkbox" class="switch-label mt-2">
+                    <span>☀️</span>
+                    <span>🌙</span>
+                    <div
+                        class="switch-toggle"
+                        :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }"
+                    ></div>
+                </label>
+            </div>
+
+            <ul class="navbar-nav d-flex justify-content-between flex-row">
                 <li class="nav-item" v-if="isLoggedIn">
                     <router-link class="btn nav-button basket" :to="{name:'basket'}">
                         Basket
@@ -146,6 +149,14 @@
 
     .switch-toggle-checked {
         transform: translateX(calc(var(--element-size) * 0.6)) !important;
+    }
+
+    .navbar-nav li{
+        padding: 5px;
+    }
+
+    .logoBox > a , .logoBox > input {
+        padding: 8px;
     }
 
 </style>

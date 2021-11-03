@@ -36,7 +36,7 @@
         align-items: center;
         padding: 10px;
         margin-bottom: 40px;
-        height: 300px;
+        height: 340px;
         border-radius: 20px;
     }
 
