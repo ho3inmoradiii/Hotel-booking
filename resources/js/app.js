@@ -15,11 +15,11 @@ import ValidationErrors from './shared/components/ValidationErrors';
 import TheSuccess from './shared/components/TheSuccess';
 import store from './store';
 import Toast from "vue-toastification";
-// Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
-import axios from 'axios';
-// import VueAxios from 'vue-axios';
-// import VueSocialauth from 'vue-social-auth';
+
+import VueDatePicker from '@mathieustan/vue-datepicker';
+import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
+
 
 const options = {
     position: "top-center",
@@ -38,6 +38,7 @@ const options = {
 
 
 Vue.use(Toast, options);
+Vue.use(VueDatePicker);
 // Vue.use(VueAxios, axios)
 // Vue.use(VueSocialauth, {
 //
@@ -74,7 +75,7 @@ const app = new Vue({
     router,
     store,
     components:{
-        index: Index
+        index: Index,
     },
     async beforeCreate(){
         this.$store.dispatch("loadStoredState");

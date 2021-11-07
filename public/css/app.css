@@ -16157,7 +16157,7 @@ a {
   --a-primary-color: yellow;
 }
 
-p, h6, span, h5, .reviewItem, .loginItem, .available, .labelFilter {
+p, h6, span, h5, .reviewItem, .loginItem, .available, .labelFilter, .dateColor {
   color: var(--text-primary-color);
 }
 

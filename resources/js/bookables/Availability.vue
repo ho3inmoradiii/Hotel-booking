@@ -10,32 +10,26 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="from" class="label">From</label>
-                <input
-                    type="text"
-                    id="from"
-                    name="from"
-                    class="form-control form-control-sm"
-                    placeholder="Start date"
-                    v-model="StartDate"
-                    @keyup.enter="check"
-                    :class="[{'is-invalid':errorFor('from')}]"
-                >
+                <label class="label">From</label>
+                <VueDatePicker v-model="StartDate"
+                               :class="[{'is-invalid':errorFor('to')}]"
+                               placeholder="Start date"
+                               :color="color"
+                               class="dateColor"
+                               :allowed-dates="allowedStartDate"
+                ></VueDatePicker>
                 <validation-errors :errors="errorFor('from')"></validation-errors>
             </div>
 
             <div class="form-group col-md-6">
-                <label for="to" class="label">To</label>
-                <input
-                    type="text"
-                    id="to"
-                    name="to"
-                    class="form-control form-control-sm"
-                    placeholder="End date"
-                    v-model="EndDate"
-                    @keyup.enter="check"
-                    :class="[{'is-invalid':errorFor('to')}]"
-                >
+                <label class="label">To</label>
+                <VueDatePicker v-model="EndDate"
+                               :class="[{'is-invalid':errorFor('to')}]"
+                               placeholder="End date"
+                               :color="color"
+                               class="dateColor"
+                               :allowed-dates="allowedEndDate"
+                ></VueDatePicker>
                 <validation-errors :errors="errorFor('to')"></validation-errors>
             </div>
 
@@ -51,10 +45,12 @@
 
 <script>
     import {is422} from "../shared/utils/response";
+    import Datepicker from 'vuejs-datepicker';
     export default {
+        components:{Datepicker},
         data(){
             return{
-                StartDate:null,
+                StartDate:new Date(),
                 EndDate:null,
                 loading:false,
                 status:null,
@@ -62,7 +58,9 @@
                 classObject: {
                     'btn-warning': false,
                     'btn-success': false
-                }
+                },
+                customDate:new Date(),
+                color: '#4f88ff',
             }
         },
         created() {
@@ -87,7 +85,18 @@
             errorFor(field){
                 return this.hasError && this.error[field] ? this.error[field] : null;
             },
+            allowedStartDate: StartDate => {
+                var date = new Date();
+                date.setDate(date.getDate() - 1);
+                return new Date(StartDate).valueOf() > date;
+            },
+            allowedEndDate(EndDate){
 
+                var date = new Date(this.StartDate);
+                date.setDate(date.getDate() - 1);
+
+                return new Date(EndDate).valueOf() >  date;
+            },
         },
         computed:{
             hasError(){
@@ -126,4 +135,12 @@
     .invalid-feedback{
         color: #b22222;
     }
+
+
+    .custom__button {
+        text-transform: capitalize;
+        padding: 8px;
+        background-color: #2d2b55;
+    }
+
 </style>
